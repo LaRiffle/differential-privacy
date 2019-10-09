@@ -169,14 +169,15 @@ class MomentsAccountant(object):
     assert (target_eps is None) ^ (target_deltas is None)
     eps_deltas = []
     log_moments = self._log_moments
-    log_moments_with_order = zip(self._moment_orders, log_moments)
     if target_eps is not None:
       for eps in target_eps:
+        log_moments_with_order = zip(self._moment_orders, log_moments)
         eps_deltas.append(
             EpsDelta(eps, self._compute_delta(log_moments_with_order, eps)))
     else:
       assert target_deltas
       for delta in target_deltas:
+        log_moments_with_order = zip(self._moment_orders, log_moments)
         eps_deltas.append(
             EpsDelta(self._compute_eps(log_moments_with_order, delta), delta))
     return eps_deltas
